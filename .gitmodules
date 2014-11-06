@@ -1,0 +1,3 @@
+[submodule "textmate.el"]
+	path = textmate.el
+	url = git://github.com/jpemberthy/textmate.el.git
