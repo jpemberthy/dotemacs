@@ -61,7 +61,7 @@
   (require 'saveplace)
   (setq-default save-place t)
 
-  ;; (global-set-key (kbd "M-/") 'hippie-expand)
+  (global-set-key (kbd "C-j") 'hippie-expand)
   (global-set-key (kbd "C-x C-b") 'ibuffer)
   (global-set-key (kbd "M-z") 'zap-up-to-char)
 

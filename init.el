@@ -18,6 +18,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-0.8.0")
 (require 'yasnippet) ;; not yasnippet-bundle
+(yas-global-mode 1)
 
 ;; peepopen: https://github.com/topfunky/PeepOpen-Issues/issues/290#issuecomment-44611464
 (setq ns-pop-up-frames nil)
@@ -27,7 +28,15 @@
 (require 'peepopen)
 (textmate-mode)
 
+;; rspec-mode
+(add-to-list 'load-path "~/.emacs.d/elpa/rspec-mode-20141005.1509")
+(require 'rspec-mode)
+
+;; start full screen
 (toggle-frame-maximized)
+
+;; disable soft returns
+(toggle-truncate-lines)
 
 ;; enable recent-file
 (require 'recentf)
@@ -56,6 +65,7 @@
 (global-set-key (kbd "M-g") 'goto-line)
 (global-set-key (kbd "C-t") 'shell)
 (global-set-key (kbd "M-F") 'query-replace)
+(global-set-key (kbd "C-j") 'hippie-expand)
 
 (global-linum-mode t)
 
