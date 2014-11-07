@@ -31,6 +31,8 @@
 ;; rspec-mode
 (add-to-list 'load-path "~/.emacs.d/elpa/rspec-mode-20141005.1509")
 (require 'rspec-mode)
+(eval-after-load 'rspec-mode
+  '(rspec-install-snippets))
 
 ;; start full screen
 (toggle-frame-maximized)
@@ -115,3 +117,8 @@
 ;;(color-theme-tomorrow-night)
 
 (windmove-default-keybindings)
+
+(when (memq window-system '(mac ns))
+  (add-to-list 'load-path "~/.emacs.d/elpa/exec-path-from-shell-20140731.907")
+  (require 'exec-path-from-shell)
+  (exec-path-from-shell-initialize))
