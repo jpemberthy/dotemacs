@@ -12,6 +12,8 @@
  ;; If there is more than one, they won't work right.
  )
 
+(setq ag-highlight-search t)
+
 ;; no backups.
 (setq make-backup-files nil)
 (setq auto-save-default nil)
