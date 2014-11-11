@@ -68,8 +68,10 @@
 (global-set-key (kbd "M-p") 'beginning-of-buffer)
 (global-set-key (kbd "M-g") 'goto-line)
 (global-set-key (kbd "C-t") 'shell)
-(global-set-key (kbd "M-F") 'query-replace)
+(global-set-key (kbd "M-R") 'query-replace)
+(global-set-key (kbd "M-F") 'ag-project-files)
 (global-set-key (kbd "C-j") 'hippie-expand)
+
 
 (global-linum-mode t)
 
