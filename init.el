@@ -52,6 +52,9 @@
 (setq mac-command-modifier 'super)
 (setq mac-option-modifier 'meta)
 
+(delete-selection-mode t)
+(setq transient-mark-mode t)
+
 ;; tramp
 (require 'tramp)
 (setq tramp-default-method "ssh")
