@@ -21,3 +21,4 @@ tramp
 # cask packages
 .cask/
 ido.last
+recentf

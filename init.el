@@ -74,7 +74,8 @@
 (global-set-key (kbd "M-R") 'query-replace)
 (global-set-key (kbd "M-F") 'ag-project-files)
 (global-set-key (kbd "C-j") 'hippie-expand)
-
+(global-set-key (kbd "C-x <C-down>") 'move-text-down)
+(global-set-key (kbd "C-x <C-up>") 'move-text-up)
 
 (global-linum-mode t)
 
