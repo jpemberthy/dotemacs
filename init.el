@@ -15,6 +15,7 @@
 (setq ag-highlight-search t)
 
 (global-set-key [f8] 'neotree-toggle)
+(global-set-key [f9] 'neotree-find)
 
 (add-hook 'after-init-hook #'projectile-global-mode)
 (setq projectile-completion-system 'grizzl)
@@ -87,8 +88,10 @@
 (setq inhibit-startup-message t)
 (menu-bar-mode 1)
 (tool-bar-mode -1)
-(scroll-bar-mode -1)
 (setq ns-use-native-fullscreen nil)
+
+(when (display-graphic-p)
+  (scroll-bar-mode -1))
 
 ;; interpret and use ansi color codes in shell output windows
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
@@ -101,8 +104,10 @@
 (setq inhibit-startup-message t)
 (menu-bar-mode 1)
 (tool-bar-mode -1)
-(scroll-bar-mode -1)
 (setq ns-use-native-fullscreen nil)
+
+(when (display-graphic-p)
+  (scroll-bar-mode -1))
 
 ;; hour/day in mode line
 (display-time)
@@ -114,7 +119,8 @@
 ;; use y/n instead of yes/no
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(server-start)
+(load "server")
+(unless (server-running-p) (server-start))
 
 ;; Nice fonts
 (set-default-font "-apple-Monaco-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1")
