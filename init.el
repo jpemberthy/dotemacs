@@ -14,6 +14,12 @@
 
 (setq ag-highlight-search t)
 
+(global-set-key [f8] 'neotree-toggle)
+
+(add-hook 'after-init-hook #'projectile-global-mode)
+(setq projectile-completion-system 'grizzl)
+(setq projectile-remember-window-configs t)
+
 ;; no backups.
 (setq make-backup-files nil)
 (setq auto-save-default nil)
@@ -22,12 +28,8 @@
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas-global-mode 1)
 
-;; peepopen: https://github.com/topfunky/PeepOpen-Issues/issues/290#issuecomment-44611464
-(setq ns-pop-up-frames nil)
 (add-to-list 'load-path "~/.emacs.d/textmate.el")
 (require 'textmate)
-(add-to-list 'load-path "~/.emacs.d/elpa/peepopen-0.1.0/")
-(require 'peepopen)
 (textmate-mode)
 
 ;; rspec-mode
@@ -35,9 +37,6 @@
 (require 'rspec-mode)
 (eval-after-load 'rspec-mode
   '(rspec-install-snippets))
-
-;; start full screen
-(toggle-frame-maximized)
 
 ;; disable soft returns
 (toggle-truncate-lines)
@@ -76,6 +75,7 @@
 (global-set-key (kbd "C-j") 'hippie-expand)
 (global-set-key (kbd "C-x <C-down>") 'move-text-down)
 (global-set-key (kbd "C-x <C-up>") 'move-text-up)
+(global-set-key (kbd "M-t") 'projectile-find-file)
 
 (global-linum-mode t)
 
