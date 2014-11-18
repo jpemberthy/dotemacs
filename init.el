@@ -60,8 +60,25 @@
 (setq mac-command-modifier 'super)
 (setq mac-option-modifier 'meta)
 
+;; delete selection on edit
 (delete-selection-mode t)
 (setq transient-mark-mode t)
+
+(defun increase-font-size ()
+  (set-face-attribute 'default (selected-frame) :height (+ (face-attribute 'default :height) 10)))
+
+(defun decrease-font-size ()
+  (set-face-attribute 'default (selected-frame) :height (- (face-attribute 'default :height) 10)))
+
+(defun font-larger ()
+  "Increases font size."
+  (interactive)
+  (increase-font-size))
+
+(defun font-smaller ()
+  "Decreases font size."
+  (interactive)
+  (decrease-font-size))
 
 ;; tramp
 (require 'tramp)
