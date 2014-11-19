@@ -102,6 +102,7 @@
 (global-set-key (kbd "C-x <C-down>") 'move-text-down)
 (global-set-key (kbd "C-x <C-up>") 'move-text-up)
 (global-set-key (kbd "M-t") 'projectile-find-file)
+(global-set-key [f3] 'revert-buffer)
 
 (global-linum-mode t)
 
