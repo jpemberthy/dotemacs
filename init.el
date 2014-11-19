@@ -80,6 +80,8 @@
   (interactive)
   (decrease-font-size))
 
+(setq column-number-mode t)
+
 ;; tramp
 (require 'tramp)
 (setq tramp-default-method "ssh")
@@ -103,6 +105,7 @@
 (global-set-key (kbd "C-x <C-up>") 'move-text-up)
 (global-set-key (kbd "M-t") 'projectile-find-file)
 (global-set-key [f3] 'revert-buffer)
+(global-set-key (kbd "M-s") 'save-buffer)
 
 (global-linum-mode t)
 
