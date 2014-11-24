@@ -25,7 +25,7 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
-(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-0.8.0")
+(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20141117.327")
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas-global-mode 1)
 
@@ -39,10 +39,10 @@
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 ;; rspec-mode
-(add-to-list 'load-path "~/.emacs.d/elpa/rspec-mode-20141005.1509")
-(require 'rspec-mode)
-(eval-after-load 'rspec-mode
-  '(rspec-install-snippets))
+;; (add-to-list 'load-path "~/.emacs.d/elpa/rspec-mode-20141005.1509")
+;; (require 'rspec-mode)
+;; (eval-after-load 'rspec-mode
+;;   '(rspec-install-snippets))
 
 ;; markdown mode
 (add-to-list 'load-path "~/.emacs.d/markdown-mode")
