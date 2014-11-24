@@ -33,6 +33,11 @@
 (require 'textmate)
 (textmate-mode)
 
+;; YAML mode
+(add-to-list 'load-path "~/.emacs.d/yaml-mode")
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
 ;; rspec-mode
 (add-to-list 'load-path "~/.emacs.d/elpa/rspec-mode-20141005.1509")
 (require 'rspec-mode)
