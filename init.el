@@ -121,10 +121,10 @@
 ;; hide all the chrome.
 (setq inhibit-startup-message t)
 (menu-bar-mode 1)
-(tool-bar-mode -1)
 (setq ns-use-native-fullscreen nil)
 
 (when (display-graphic-p)
+  (tool-bar-mode -1)
   (scroll-bar-mode -1))
 
 ;; interpret and use ansi color codes in shell output windows
@@ -133,15 +133,6 @@
 ;; use cmd as meta in Carbon Emacs
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'option)
-
-;; hide all the chrome.
-(setq inhibit-startup-message t)
-(menu-bar-mode 1)
-(tool-bar-mode -1)
-(setq ns-use-native-fullscreen nil)
-
-(when (display-graphic-p)
-  (scroll-bar-mode -1))
 
 ;; hour/day in mode line
 (display-time)
