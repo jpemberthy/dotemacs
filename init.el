@@ -53,7 +53,7 @@
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;; disable soft returns
-(toggle-truncate-lines)
+(setq truncate-partial-width-windows nil)
 
 ;; enable recent-file
 (require 'recentf)
@@ -85,8 +85,6 @@
   (interactive)
   (decrease-font-size))
 
-(setq column-number-mode t)
-
 ;; tramp
 (require 'tramp)
 (setq tramp-default-method "ssh")
@@ -112,6 +110,8 @@
 (global-set-key [f3] 'revert-buffer)
 (global-set-key (kbd "M-s") 'save-buffer)
 
+;; show column and line numbers.
+(setq column-number-mode t)
 (global-linum-mode t)
 
 ;; Febuiles dotemacs
