@@ -13,6 +13,7 @@
  )
 
 (setq ag-highlight-search t)
+(show-paren-mode 1)
 
 (global-set-key [f8] 'neotree-toggle)
 (global-set-key [f9] 'neotree-find)
