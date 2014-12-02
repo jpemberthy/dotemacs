@@ -69,6 +69,15 @@
 ;; delete selection on edit
 (delete-selection-mode t)
 (setq transient-mark-mode t)
+;; Ctrl-K with no kill
+(defun delete-line-no-kill ()
+  (interactive)
+  (delete-region
+   (point)
+   (save-excursion (move-end-of-line 1) (point)))
+  (delete-char 1)
+)
+(global-set-key (kbd "C-k") 'delete-line-no-kill)
 
 (defun increase-font-size ()
   (set-face-attribute 'default (selected-frame) :height (+ (face-attribute 'default :height) 10)))
