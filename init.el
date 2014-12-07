@@ -103,6 +103,12 @@
                          ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
 ;; my rebinds
 (global-set-key (kbd "M-z") 'undo)
 (global-set-key (kbd "<M-down>") 'end-of-buffer)
@@ -119,6 +125,7 @@
 (global-set-key (kbd "M-t") 'projectile-find-file)
 (global-set-key [f3] 'revert-buffer)
 (global-set-key (kbd "M-s") 'save-buffer)
+
 
 ;; show column and line numbers.
 (setq column-number-mode t)
@@ -138,7 +145,7 @@
   (scroll-bar-mode -1))
 
 ;; interpret and use ansi color codes in shell output windows
-(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+(Autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 
 ;; use cmd as meta in Carbon Emacs
 (setq mac-command-modifier 'meta)
