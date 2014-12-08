@@ -103,7 +103,7 @@
                          ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 
-(require 'multiple-cursors)
+;; multiple cursors
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
@@ -143,9 +143,6 @@
 (when (display-graphic-p)
   (tool-bar-mode -1)
   (scroll-bar-mode -1))
-
-;; interpret and use ansi color codes in shell output windows
-(Autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 
 ;; use cmd as meta in Carbon Emacs
 (setq mac-command-modifier 'meta)
