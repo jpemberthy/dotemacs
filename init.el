@@ -126,10 +126,17 @@
 (global-set-key [f3] 'revert-buffer)
 (global-set-key (kbd "M-s") 'save-buffer)
 
-
 ;; show column and line numbers.
 (setq column-number-mode t)
 (global-linum-mode t)
+
+;; Go mode
+;; Automatically formats your code to the one true coding style, used by every Go developer.
+(add-hook 'before-save-hook 'gofmt-before-save)
+;; only load company-mode with go
+(add-hook 'go-mode-hook (lambda ()
+                          (set (make-local-variable 'company-backends) '(company-go))
+                          (company-mode)))
 
 ;; Febuiles dotemacs
 ;; interpret and use ansi color codes in shell output windows
