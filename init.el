@@ -22,6 +22,8 @@
 (setq projectile-completion-system 'grizzl)
 (setq projectile-remember-window-configs t)
 
+(global-auto-revert-mode t)
+
 ;; no backups.
 (setq make-backup-files nil)
 (setq auto-save-default nil)
