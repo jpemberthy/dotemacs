@@ -41,12 +41,6 @@
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
-;; rspec-mode
-;; (add-to-list 'load-path "~/.emacs.d/elpa/rspec-mode-20141005.1509")
-;; (require 'rspec-mode)
-;; (eval-after-load 'rspec-mode
-;;   '(rspec-install-snippets))
-
 ;; markdown mode
 (add-to-list 'load-path "~/.emacs.d/markdown-mode")
 (autoload 'markdown-mode "markdown-mode"
@@ -96,6 +90,11 @@
   "Decreases font size."
   (interactive)
   (decrease-font-size))
+
+;; Show full file path
+(setq frame-title-format
+      (list (format "%s %%S: %%j " (system-name))
+        '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 
 ;; tramp
 (require 'tramp)
@@ -172,7 +171,7 @@
 
 ;; Nice fonts
 (set-default-font "-apple-Monaco-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1")
-(set-face-attribute 'default nil :height 130)
+(set-face-attribute 'default nil :height 120)
 
 (load-file "~/.emacs.d/color-theme-tomorrow.el")
 ;;(color-theme-initialize)
