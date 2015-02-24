@@ -27,6 +27,10 @@
 ;; no backups.
 (setq make-backup-files nil)
 (setq auto-save-default nil)
+(setq backup-directory-alist
+          `((".*" . ,temporary-file-directory)))
+    (setq auto-save-file-name-transforms
+          `((".*" ,temporary-file-directory t)))
 
 (add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20141117.327")
 (require 'yasnippet) ;; not yasnippet-bundle
@@ -138,6 +142,24 @@
 (add-hook 'go-mode-hook (lambda ()
                           (set (make-local-variable 'company-backends) '(company-go))
                           (company-mode)))
+
+;; Coffee mode
+;; automatically clean up bad whitespace
+(setq whitespace-action '(auto-cleanup))
+;; only show bad whitespace
+(setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab))
+;; This gives you a tab of 2 spaces
+(custom-set-variables '(coffee-tab-width 2))
+;; Set coffee-indent-tabs-mode t if you want to use TAB instead of spaces.
+(setq coffee-indent-tabs-mode t)
+
+;; JS Mode
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+(custom-set-variables
+ '(js2-basic-offset 2)
+ '(js2-bounce-indent-p t)
+)
 
 ;; Febuiles dotemacs
 ;; interpret and use ansi color codes in shell output windows
