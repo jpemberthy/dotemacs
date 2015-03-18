@@ -32,7 +32,7 @@
     (setq auto-save-file-name-transforms
           `((".*" ,temporary-file-directory t)))
 
-(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20141117.327")
+(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20150318.348")
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas-global-mode 1)
 
@@ -158,7 +158,6 @@
 
 (custom-set-variables
  '(js2-basic-offset 2)
- '(js2-bounce-indent-p t)
 )
 
 ;; Febuiles dotemacs
@@ -202,6 +201,6 @@
 (windmove-default-keybindings)
 
 (when (memq window-system '(mac ns))
-  (add-to-list 'load-path "~/.emacs.d/elpa/exec-path-from-shell-20140731.907")
+  (add-to-list 'load-path "~/.emacs.d/elpa/exec-path-from-shell-20141212.846")
   (require 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
