@@ -36,6 +36,9 @@
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas-global-mode 1)
 
+(eval-after-load 'rspec-mode
+ '(rspec-install-snippets))
+
 (add-to-list 'load-path "~/.emacs.d/textmate.el")
 (require 'textmate)
 (textmate-mode)
