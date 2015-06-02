@@ -146,6 +146,16 @@
                           (set (make-local-variable 'company-backends) '(company-go))
                           (company-mode)))
 
+;; Moar go sugar.
+(defun my-go-mode-hook ()
+  (whitespace-mode -1) ; don't highlight hard tabs
+  (setq
+   tab-width 2         ; display tabs as two-spaces
+   indent-tabs-mode 1  ; use hard tabs to indent
+   fill-column 100))   ; set a reasonable fill width
+
+(add-hook 'go-mode-hook 'my-go-mode-hook)
+
 ;; Coffee mode
 ;; automatically clean up bad whitespace
 (setq whitespace-action '(auto-cleanup))

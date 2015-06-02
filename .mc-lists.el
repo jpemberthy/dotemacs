@@ -4,9 +4,11 @@
 (setq mc/cmds-to-run-for-all
       '(
 	markdown-exdent-or-delete
+	yas-expand
 	))
 
 (setq mc/cmds-to-run-once
       '(
 	delete-line-no-kill
+	yaml-electric-backspace
 	))
