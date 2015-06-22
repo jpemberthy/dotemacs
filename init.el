@@ -140,6 +140,7 @@
 
 ;; Go mode
 ;; Automatically formats your code to the one true coding style, used by every Go developer.
+(setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
 ;; only load company-mode with go
 (add-hook 'go-mode-hook (lambda ()
