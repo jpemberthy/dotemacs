@@ -138,6 +138,11 @@
 (setq column-number-mode t)
 (global-linum-mode t)
 
+;; auto-rebalance vertical buffers after split.
+(defadvice split-window-right (after rebalance-windows activate)
+  (balance-windows))
+(ad-activate 'split-window-right)
+
 ;; Go mode
 ;; Automatically formats your code to the one true coding style, used by every Go developer.
 (setq gofmt-command "goimports")
@@ -218,3 +223,4 @@
   (add-to-list 'load-path "~/.emacs.d/elpa/exec-path-from-shell-20141212.846")
   (require 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
+(put 'downcase-region 'disabled nil)
