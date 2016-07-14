@@ -34,7 +34,7 @@
     (setq auto-save-file-name-transforms
           `((".*" ,temporary-file-directory t)))
 
-(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20150318.348")
+(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20160713.1403")
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas-global-mode 1)
 
@@ -230,7 +230,7 @@
 (windmove-default-keybindings)
 
 (when (memq window-system '(mac ns))
-  (add-to-list 'load-path "~/.emacs.d/elpa/exec-path-from-shell-20141212.846")
+  (add-to-list 'load-path "~/.emacs.d/elpa/exec-path-from-shell-20160112.2246")
   (require 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
 (put 'downcase-region 'disabled nil)
