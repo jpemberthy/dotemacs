@@ -4,6 +4,9 @@
 (setq mc/cmds-to-run-for-all
       '(
 	markdown-exdent-or-delete
+	org-beginning-of-line
+	org-self-insert-command
+	yaml-electric-dash-and-dot
 	yas-expand
 	))
 

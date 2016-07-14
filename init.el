@@ -18,9 +18,11 @@
 (global-set-key [f8] 'neotree-toggle)
 (global-set-key [f9] 'neotree-find)
 
+
 (add-hook 'after-init-hook #'projectile-global-mode)
 (setq projectile-completion-system 'grizzl)
 (setq projectile-remember-window-configs t)
+
 
 (global-auto-revert-mode t)
 
@@ -146,6 +148,8 @@
 ;; Go mode
 ;; Automatically formats your code to the one true coding style, used by every Go developer.
 (setq gofmt-command "goimports")
+;; (setq gofmt-command "gofmt")
+
 (add-hook 'before-save-hook 'gofmt-before-save)
 ;; only load company-mode with go
 (add-hook 'go-mode-hook (lambda ()
@@ -161,6 +165,12 @@
    fill-column 100))   ; set a reasonable fill width
 
 (add-hook 'go-mode-hook 'my-go-mode-hook)
+
+;; (use-package exec-path-from-shell
+;;  :config
+;;  (progn
+;;    (add-to-list 'exec-path-from-shell-variables "GOPATH")
+;;    (exec-path-from-shell-initialize)))
 
 ;; Coffee mode
 ;; automatically clean up bad whitespace
@@ -224,3 +234,4 @@
   (require 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
 (put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)

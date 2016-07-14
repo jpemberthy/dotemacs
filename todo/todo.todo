@@ -1,0 +1,13 @@
+(("global" . [2 0 0 0]) ("todo" . [1 0 0 0]) ("troll" . [0 0 0 0]))
+--==-- global
+[Nov 11, 2015] say bye
+[Nov 11, 2015] check foo
+
+==--== DONE
+--==-- todo
+[Nov 11, 2015] say hello world
+
+==--== DONE
+--==-- troll
+
+==--== DONE
