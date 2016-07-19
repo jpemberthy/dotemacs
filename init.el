@@ -165,6 +165,7 @@
    fill-column 100))   ; set a reasonable fill width
 
 (add-hook 'go-mode-hook 'my-go-mode-hook)
+(getenv "HOME")
 
 ;; (use-package exec-path-from-shell
 ;;  :config
@@ -235,3 +236,5 @@
   (exec-path-from-shell-initialize))
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
+
+(exec-path-from-shell-copy-env "GOPATH")
