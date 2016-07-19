@@ -151,10 +151,19 @@
 ;; (setq gofmt-command "gofmt")
 
 (add-hook 'before-save-hook 'gofmt-before-save)
-;; only load company-mode with go
-(add-hook 'go-mode-hook (lambda ()
-                          (set (make-local-variable 'company-backends) '(company-go))
-                          (company-mode)))
+
+;; only load company-mode with go. Temp disabled in favor of auto-complete.
+;; (add-hook 'go-mode-hook (lambda ()
+;;                           (set (make-local-variable 'company-backends) '(company-go))
+;;                           (company-mode)))
+
+;; Let's give auto-complete a try
+(defun auto-complete-for-go ()
+  (auto-complete-mode 1))
+(add-hook 'go-mode-hook 'auto-complete-for-go)
+
+(with-eval-after-load 'go-mode
+   (require 'go-autocomplete))
 
 ;; Moar go sugar.
 (defun my-go-mode-hook ()
@@ -165,13 +174,6 @@
    fill-column 100))   ; set a reasonable fill width
 
 (add-hook 'go-mode-hook 'my-go-mode-hook)
-(getenv "HOME")
-
-;; (use-package exec-path-from-shell
-;;  :config
-;;  (progn
-;;    (add-to-list 'exec-path-from-shell-variables "GOPATH")
-;;    (exec-path-from-shell-initialize)))
 
 ;; Coffee mode
 ;; automatically clean up bad whitespace
@@ -238,3 +240,7 @@
 (put 'upcase-region 'disabled nil)
 
 (exec-path-from-shell-copy-env "GOPATH")
+
+;; lint on save
+(add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs"))
+(require 'golint)
