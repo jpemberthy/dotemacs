@@ -175,6 +175,9 @@
 
 (add-hook 'go-mode-hook 'my-go-mode-hook)
 
+;; load go-guru "what" mode
+(add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)
+
 ;; Coffee mode
 ;; automatically clean up bad whitespace
 (setq whitespace-action '(auto-cleanup))
