@@ -1,9 +1,11 @@
+                                        ;TODO:
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
- ;; If you edit it
- ;; by hand, you could mess it up, so be careful.
+ ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(coffee-tab-width 2)
+ '(js-indent-level 4)
  '(safe-local-variable-values (quote ((encoding . utf-8)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -11,6 +13,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(go-guru-hl-identifier-face ((t (:inherit highlight :background "#3e4446")))))
+
+;; SOFT TABS MAYBE.
+;; (setq-default indent-tabs-mode nil)
+;; (setq-default tab-width 4)
+;; (setq indent-line-function 'insert-tab)
 
 (setq ag-highlight-search t)
 (show-paren-mode 1)
@@ -23,7 +30,6 @@
 (setq projectile-completion-system 'grizzl)
 (setq projectile-remember-window-configs t)
 
-
 (global-auto-revert-mode t)
 
 ;; no backups.
@@ -34,7 +40,7 @@
     (setq auto-save-file-name-transforms
           `((".*" ,temporary-file-directory t)))
 
-(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20160713.1403")
+(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20170216.1928")
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas-global-mode 1)
 
@@ -153,17 +159,17 @@
 (add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; only load company-mode with go. Temp disabled in favor of auto-complete.
-;; (add-hook 'go-mode-hook (lambda ()
-;;                           (set (make-local-variable 'company-backends) '(company-go))
-;;                           (company-mode)))
+(add-hook 'go-mode-hook (lambda ()
+                          (set (make-local-variable 'company-backends) '(company-go))
+                          (company-mode)))
 
 ;; Let's give auto-complete a try
-(defun auto-complete-for-go ()
-  (auto-complete-mode 1))
-(add-hook 'go-mode-hook 'auto-complete-for-go)
+;; (defun auto-complete-for-go ()
+;;   (auto-complete-mode 1))
+;; (add-hook 'go-mode-hook 'auto-complete-for-go)
 
-(with-eval-after-load 'go-mode
-   (require 'go-autocomplete))
+;; (with-eval-after-load 'go-mode
+;;    (require 'go-autocomplete))
 
 ;; Moar go sugar.
 (defun my-go-mode-hook ()
@@ -178,22 +184,23 @@
 ;; load go-guru "what" mode
 (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)
 
+;; Python stuff
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)                 ; optional
+
 ;; Coffee mode
 ;; automatically clean up bad whitespace
-(setq whitespace-action '(auto-cleanup))
+;; (setq whitespace-action '(auto-cleanup))
 ;; only show bad whitespace
-(setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab))
+;; (setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab))
 ;; This gives you a tab of 2 spaces
-(custom-set-variables '(coffee-tab-width 2))
+
 ;; Set coffee-indent-tabs-mode t if you want to use TAB instead of spaces.
 (setq coffee-indent-tabs-mode t)
 
 ;; JS Mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-
-(custom-set-variables
- '(js2-basic-offset 2)
-)
+;; (define-key js2-mode-map (kbd "C-c C-j") 'js2-jump-to-definition)
 
 ;; Febuiles dotemacs
 ;; interpret and use ansi color codes in shell output windows
@@ -226,6 +233,7 @@
 (unless (server-running-p) (server-start))
 
 ;; Nice fonts
+;; (set-default-font "-*-Go-normal-normal-normal-*-*-*-*-*-p-0-iso10646-1")
 (set-default-font "-apple-Monaco-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1")
 (set-face-attribute 'default nil :height 120)
 
@@ -236,7 +244,7 @@
 (windmove-default-keybindings)
 
 (when (memq window-system '(mac ns))
-  (add-to-list 'load-path "~/.emacs.d/elpa/exec-path-from-shell-20160112.2246")
+  (add-to-list 'load-path "~/.emacs.d/elpa/exec-path-from-shell-20170212.2116")
   (require 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
 (put 'downcase-region 'disabled nil)
