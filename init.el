@@ -1,5 +1,3 @@
-                                        ;TODO:
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -165,7 +163,7 @@
 
 (add-hook 'before-save-hook 'gofmt-before-save)
 
-;; only load company-mode with go. Temp disabled in favor of auto-complete.
+;; only load company-mode with go.
 (add-hook 'go-mode-hook (lambda ()
                           (set (make-local-variable 'company-backends) '(company-go))
                           (company-mode)))
