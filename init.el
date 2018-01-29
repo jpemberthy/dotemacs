@@ -193,6 +193,7 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)                 ; optional
 
+
 ;; Coffee mode
 ;; automatically clean up bad whitespace
 ;; (setq whitespace-action '(auto-cleanup))
