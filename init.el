@@ -9,7 +9,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(coffee-tab-width 2)
  '(js-indent-level 4)
  '(safe-local-variable-values (quote ((encoding . utf-8)))))
 (custom-set-faces
@@ -30,7 +29,6 @@
 (global-set-key [f8] 'neotree-toggle)
 (global-set-key [f9] 'neotree-find)
 
-
 (add-hook 'after-init-hook #'projectile-global-mode)
 (setq projectile-completion-system 'grizzl)
 (setq projectile-remember-window-configs t)
@@ -49,9 +47,6 @@
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas-global-mode 1)
 
-(eval-after-load 'rspec-mode
- '(rspec-install-snippets))
-
 (add-to-list 'load-path "~/.emacs.d/textmate.el")
 (require 'textmate)
 (textmate-mode)
@@ -60,14 +55,6 @@
 (add-to-list 'load-path "~/.emacs.d/yaml-mode")
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-
-;; markdown mode
-(add-to-list 'load-path "~/.emacs.d/markdown-mode")
-(autoload 'markdown-mode "markdown-mode"
-   "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;; disable soft returns
 (setq truncate-partial-width-windows nil)
@@ -194,16 +181,6 @@
 (setq jedi:complete-on-dot t)                 ; optional
 
 
-;; Coffee mode
-;; automatically clean up bad whitespace
-;; (setq whitespace-action '(auto-cleanup))
-;; only show bad whitespace
-;; (setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab))
-;; This gives you a tab of 2 spaces
-
-;; Set coffee-indent-tabs-mode t if you want to use TAB instead of spaces.
-(setq coffee-indent-tabs-mode t)
-
 ;; JS Mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 ;; (define-key js2-mode-map (kbd "C-c C-j") 'js2-jump-to-definition)
@@ -240,7 +217,7 @@
 
 ;; Nice fonts
 ;; (set-default-font "-*-Go-normal-normal-normal-*-*-*-*-*-p-0-iso10646-1")
-(set-default-font "-apple-Monaco-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1")
+;; (set-default-font "-apple-Monaco-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1")
 (set-face-attribute 'default nil :height 120)
 
 (load-file "~/.emacs.d/color-theme-tomorrow.el")
