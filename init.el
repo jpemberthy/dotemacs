@@ -9,7 +9,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
  '(js-indent-level 4)
+ '(package-selected-packages
+   (quote
+    (projectile-rails color-theme-solarized ## yasnippet virtualenvwrapper virtualenv use-package thrift string-inflection rspec-mode puppetfile-mode puppet-mode projectile neotree multiple-cursors move-text lua-mode let-alist json-mode js2-mode jedi-core grizzl go-guru go-autocomplete git-commit-training-wheels-mode git-blame gist f exec-path-from-shell elixir-mode direx company-go coffee-mode ag 0blayout)))
  '(safe-local-variable-values (quote ((encoding . utf-8)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -47,10 +53,6 @@
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas-global-mode 1)
 
-(add-to-list 'load-path "~/.emacs.d/textmate.el")
-(require 'textmate)
-(textmate-mode)
-
 ;; YAML mode
 (add-to-list 'load-path "~/.emacs.d/yaml-mode")
 (require 'yaml-mode)
@@ -64,10 +66,6 @@
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
-
-;; command as meta
-(setq mac-command-modifier 'super)
-(setq mac-option-modifier 'meta)
 
 ;; delete selection on edit
 (delete-selection-mode t)
@@ -108,8 +106,7 @@
 (setq tramp-default-method "ssh")
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+                         ("melpa" . "http://melpa.org/packages/")))
 
 ;; multiple cursors
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
@@ -130,6 +127,7 @@
 (global-set-key (kbd "C-j") 'hippie-expand)
 (global-set-key (kbd "C-x <C-down>") 'move-text-down)
 (global-set-key (kbd "C-x <C-up>") 'move-text-up)
+(global-set-key (kbd "C-c C-c") 'compile)
 (global-set-key (kbd "M-t") 'projectile-find-file)
 (global-set-key [f3] 'revert-buffer)
 (global-set-key (kbd "M-s") 'save-buffer)
@@ -166,6 +164,9 @@
 ;; Moar go sugar.
 (defun my-go-mode-hook ()
   (whitespace-mode -1) ; don't highlight hard tabs
+  (if (not (string-match "go" compile-command))   ; set compile command default
+      (set (make-local-variable 'compile-command)
+           "cd .. && make test"))
   (setq
    tab-width 2         ; display tabs as two-spaces
    indent-tabs-mode 1  ; use hard tabs to indent
@@ -177,9 +178,17 @@
 (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)
 
 ;; Python stuff
+(setq jedi:server-args
+      '("--virtual-env" "/Users/juanp/code/zop/env"))
+
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)                 ; optional
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)                 ; optional
+(setq-default indent-tabs-mode nil)
 
+;; Ruby --- Rails stuff
+(projectile-rails-global-mode)
 
 ;; JS Mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -217,12 +226,12 @@
 
 ;; Nice fonts
 ;; (set-default-font "-*-Go-normal-normal-normal-*-*-*-*-*-p-0-iso10646-1")
-;; (set-default-font "-apple-Monaco-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1")
+(set-default-font "-apple-Monaco-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1")
 (set-face-attribute 'default nil :height 120)
 
 (load-file "~/.emacs.d/color-theme-tomorrow.el")
-;;(color-theme-initialize)
-;;(color-theme-tomorrow-night)
+;; (color-theme-initialize)
+;; (color-theme-tomorrow-night)
 
 (windmove-default-keybindings)
 
@@ -238,3 +247,76 @@
 ;; lint on save
 (add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs"))
 (require 'golint)
+
+(add-to-list 'load-path "~/.emacs.d/textmate.el")
+(require 'textmate)
+(textmate-mode)
+
+(defvar xah-run-current-file-before-hook nil "Hook for `xah-run-current-file'. Before the file is run.")
+(defvar xah-run-current-file-after-hook nil "Hook for `xah-run-current-file'. After the file is run.")
+(defun xah-run-current-file ()
+  (interactive)
+  (let (
+        ($outputb "*xah-run output*")
+        (resize-mini-windows nil)
+        ($suffix-map
+         ;; (‹extension› . ‹shell program name›)
+         `(
+           ("php" . "php")
+           ("pl" . "perl")
+           ("py" . "python")
+           ("py3" . ,(if (string-equal system-type "windows-nt") "c:/Python32/python.exe" "python3"))
+           ("rb" . "ruby")
+           ("go" . "go run")
+           ("hs" . "runhaskell")
+           ("js" . "node")
+           ("mjs" . "node --experimental-modules ")
+           ("ts" . "tsc") ; TypeScript
+           ("tsx" . "tsc")
+           ("sh" . "bash")
+           ("clj" . "java -cp ~/apps/clojure-1.6.0/clojure-1.6.0.jar clojure.main")
+           ("rkt" . "racket")
+           ("ml" . "ocaml")
+           ("vbs" . "cscript")
+           ("tex" . "pdflatex")
+           ("latex" . "pdflatex")
+           ("java" . "javac")
+           ;; ("pov" . "/usr/local/bin/povray +R2 +A0.1 +J1.2 +Am2 +Q9 +H480 +W640")
+           ))
+        $fname
+        $fSuffix
+        $prog-name
+        $cmd-str)
+    (when (not (buffer-file-name)) (save-buffer))
+    (when (buffer-modified-p) (save-buffer))
+    (setq $fname (buffer-file-name))
+    (setq $fSuffix (file-name-extension $fname))
+    (setq $prog-name (cdr (assoc $fSuffix $suffix-map)))
+    (setq $cmd-str (concat $prog-name " \""   $fname "\" &"))
+    (run-hooks 'xah-run-current-file-before-hook)
+    (cond
+     ((string-equal $fSuffix "el")
+      (load $fname))
+     ((or (string-equal $fSuffix "ts") (string-equal $fSuffix "tsx"))
+      (if (fboundp 'xah-ts-compile-file)
+          (progn
+            (xah-ts-compile-file current-prefix-arg))
+        (if $prog-name
+            (progn
+              (message "Running")
+              (shell-command $cmd-str $outputb ))
+          (error "No recognized program file suffix for this file."))))
+     ;; ((string-equal $fSuffix "go")
+     ;;  (when (fboundp 'gofmt) (gofmt) )
+     ;;  (shell-command $cmd-str $outputb ))
+     ((string-equal $fSuffix "java")
+      (progn
+        (shell-command (format "java %s" (file-name-sans-extension (file-name-nondirectory $fname))) $outputb )))
+     (t (if $prog-name
+            (progn
+              (message "Running")
+              (shell-command $cmd-str $outputb ))
+          (error "No recognized program file suffix for this file."))))
+    (run-hooks 'xah-run-current-file-after-hook)))
+
+(global-set-key (kbd "C-c C-r") 'xah-run-current-file)
