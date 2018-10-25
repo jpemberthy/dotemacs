@@ -50,9 +50,6 @@
           `((".*" ,temporary-file-directory t)))
 
 (add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20170216.1928")
-(setq yas-snippet-dirs
-      '("~/.emacs.d/snippets"                 ;; personal snippets
-        ))
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas-global-mode 1)
 
@@ -136,6 +133,7 @@
 (global-set-key (kbd "M-t") 'projectile-find-file)
 (global-set-key [f3] 'revert-buffer)
 (global-set-key (kbd "M-s") 'save-buffer)
+(global-set-key (kbd "M-/") 'comment-line)
 
 ;; show column and line numbers.
 (setq column-number-mode t)
