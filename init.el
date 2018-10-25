@@ -50,6 +50,9 @@
           `((".*" ,temporary-file-directory t)))
 
 (add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20170216.1928")
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"                 ;; personal snippets
+        ))
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas-global-mode 1)
 
