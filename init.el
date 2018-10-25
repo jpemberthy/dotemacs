@@ -15,7 +15,7 @@
  '(js-indent-level 4)
  '(package-selected-packages
    (quote
-    (projectile-rails color-theme-solarized ## yasnippet virtualenvwrapper virtualenv use-package thrift string-inflection rspec-mode puppetfile-mode puppet-mode projectile neotree multiple-cursors move-text lua-mode let-alist json-mode js2-mode jedi-core grizzl go-guru go-autocomplete git-commit-training-wheels-mode git-blame gist f exec-path-from-shell elixir-mode direx company-go coffee-mode ag 0blayout)))
+    (jedi projectile-rails color-theme-solarized ## yasnippet virtualenvwrapper virtualenv use-package thrift string-inflection rspec-mode puppetfile-mode puppet-mode projectile neotree multiple-cursors move-text lua-mode let-alist json-mode js2-mode jedi-core grizzl go-guru go-autocomplete git-commit-training-wheels-mode git-blame gist f exec-path-from-shell elixir-mode direx company-go coffee-mode ag 0blayout)))
  '(safe-local-variable-values (quote ((encoding . utf-8)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -52,6 +52,8 @@
 (add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20170216.1928")
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas-global-mode 1)
+
+;; (add-to-list 'load-path "~/.emacs.d/snippets/yasnippets-rails")
 
 ;; YAML mode
 (add-to-list 'load-path "~/.emacs.d/yaml-mode")
@@ -188,7 +190,7 @@
 (setq-default indent-tabs-mode nil)
 
 ;; Ruby --- Rails stuff
-(projectile-rails-global-mode)
+;; (projectile-rails-global-mode)
 
 ;; JS Mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -227,7 +229,7 @@
 ;; Nice fonts
 ;; (set-default-font "-*-Go-normal-normal-normal-*-*-*-*-*-p-0-iso10646-1")
 (set-default-font "-apple-Monaco-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1")
-(set-face-attribute 'default nil :height 120)
+(set-face-attribute 'default nil :height 130)
 
 (load-file "~/.emacs.d/color-theme-tomorrow.el")
 ;; (color-theme-initialize)

@@ -24,3 +24,4 @@ ido.last
 recentf
 projectile-bookmarks.eld
 var/pcache/*
+.python-environments
