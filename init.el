@@ -10,12 +10,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
+        (quote
+         ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
  '(js-indent-level 4)
  '(package-selected-packages
-   (quote
-    (jedi projectile-rails color-theme-solarized ## yasnippet virtualenvwrapper virtualenv use-package thrift string-inflection rspec-mode puppetfile-mode puppet-mode projectile neotree multiple-cursors move-text lua-mode let-alist json-mode js2-mode jedi-core grizzl go-guru go-autocomplete git-commit-training-wheels-mode git-blame gist f exec-path-from-shell elixir-mode direx company-go coffee-mode ag 0blayout)))
+        (quote
+         (flx-ido flx ivy jedi projectile-rails color-theme-solarized ## yasnippet use-package thrift string-inflection rspec-mode puppetfile-mode puppet-mode projectile neotree multiple-cursors move-text lua-mode let-alist json-mode js2-mode go-guru go-autocomplete git-commit-training-wheels-mode git-blame gist f exec-path-from-shell elixir-mode direx company-go ag 0blayout)))
  '(safe-local-variable-values (quote ((encoding . utf-8)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -25,9 +25,9 @@
  '(go-guru-hl-identifier-face ((t (:inherit highlight :background "#3e4446")))))
 
 ;; SOFT TABS MAYBE.
-;; (setq-default indent-tabs-mode nil)
-;; (setq-default tab-width 4)
-;; (setq indent-line-function 'insert-tab)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
 
 (setq ag-highlight-search t)
 (show-paren-mode 1)
@@ -36,7 +36,7 @@
 (global-set-key [f9] 'neotree-find)
 
 (add-hook 'after-init-hook #'projectile-global-mode)
-(setq projectile-completion-system 'grizzl)
+(setq projectile-completion-system 'ivy)
 (setq projectile-remember-window-configs t)
 
 (global-auto-revert-mode t)
@@ -147,15 +147,15 @@
 
 ;; Go mode
 ;; Automatically formats your code to the one true coding style, used by every Go developer.
-(setq gofmt-command "goimports")
+;; (setq gofmt-command "goimports")
 ;; (setq gofmt-command "gofmt")
 
-(add-hook 'before-save-hook 'gofmt-before-save)
+;; (add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; only load company-mode with go.
-(add-hook 'go-mode-hook (lambda ()
-                          (set (make-local-variable 'company-backends) '(company-go))
-                          (company-mode)))
+;; (add-hook 'go-mode-hook (lambda ()
+;;                           (set (make-local-variable 'company-backends) '(company-go))
+;;                           (company-mode)))
 
 ;; Let's give auto-complete a try
 ;; (defun auto-complete-for-go ()
@@ -166,30 +166,20 @@
 ;;    (require 'go-autocomplete))
 
 ;; Moar go sugar.
-(defun my-go-mode-hook ()
-  (whitespace-mode -1) ; don't highlight hard tabs
-  (if (not (string-match "go" compile-command))   ; set compile command default
-      (set (make-local-variable 'compile-command)
-           "cd .. && make test"))
-  (setq
-   tab-width 2         ; display tabs as two-spaces
-   indent-tabs-mode 1  ; use hard tabs to indent
-   fill-column 100))   ; set a reasonable fill width
+;; (defun my-go-mode-hook ()
+;;   (whitespace-mode -1) ; don't highlight hard tabs
+;;   (if (not (string-match "go" compile-command))   ; set compile command default
+;;       (set (make-local-variable 'compile-command)
+;;            "cd .. && make test"))
+;;   (setq
+;;    tab-width 2         ; display tabs as two-spaces
+;;    indent-tabs-mode 1  ; use hard tabs to indent
+;;    fill-column 100))   ; set a reasonable fill width
 
-(add-hook 'go-mode-hook 'my-go-mode-hook)
+;; (add-hook 'go-mode-hook 'my-go-mode-hook)
 
-;; load go-guru "what" mode
-(add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)
-
-;; Python stuff
-(setq jedi:server-args
-      '("--virtual-env" "/Users/juanp/code/zop/env"))
-
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)                 ; optional
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)                 ; optional
-(setq-default indent-tabs-mode nil)
+;; ;; load go-guru "what" mode
+;; (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)
 
 ;; Ruby --- Rails stuff
 ;; (projectile-rails-global-mode)
@@ -249,8 +239,8 @@
 (exec-path-from-shell-copy-env "GOPATH")
 
 ;; lint on save
-(add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs"))
-(require 'golint)
+;; (add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs"))
+;; (require 'golint)
 
 (add-to-list 'load-path "~/.emacs.d/textmate.el")
 (require 'textmate)

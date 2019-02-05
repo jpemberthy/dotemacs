@@ -1,10 +1,12 @@
 ;;; projectile-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory #$) (car load-path))))
+
 
-;;;### (autoloads nil "projectile" "projectile.el" (22708 30394 0
-;;;;;;  0))
+;;;### (autoloads nil "projectile" "projectile.el" (0 0 0 0))
 ;;; Generated autoloads from projectile.el
 
 (autoload 'projectile-version "projectile" "\
@@ -25,10 +27,10 @@ just return nil.
 (autoload 'projectile-invalidate-cache "projectile" "\
 Remove the current project's files from `projectile-projects-cache'.
 
-With a prefix argument ARG prompts for the name of the project whose cache
+With a prefix argument PROMPT prompts for the name of the project whose cache
 to invalidate.
 
-\(fn ARG)" t nil)
+\(fn PROMPT)" t nil)
 
 (autoload 'projectile-purge-file-from-cache "projectile" "\
 Purge FILE from the cache of the current project.
@@ -52,12 +54,23 @@ at the top level of DIRECTORY.
 
 \(fn DIRECTORY)" t nil)
 
+(autoload 'projectile-discover-projects-in-search-path "projectile" "\
+Discover projects in `projectile-project-search-path'.
+Invoked automatically when `projectile-mode' is enabled.
+
+\(fn)" t nil)
+
 (autoload 'projectile-switch-to-buffer "projectile" "\
 Switch to a project buffer.
 
 \(fn)" t nil)
 
 (autoload 'projectile-switch-to-buffer-other-window "projectile" "\
+Switch to a project buffer and show it in another window.
+
+\(fn)" t nil)
+
+(autoload 'projectile-switch-to-buffer-other-frame "projectile" "\
 Switch to a project buffer and show it in another window.
 
 \(fn)" t nil)
@@ -93,10 +106,17 @@ Other file extensions can be customized with the variable `projectile-other-file
 
 \(fn &optional FLEX-MATCHING)" t nil)
 
+(autoload 'projectile-find-other-file-other-frame "projectile" "\
+Switch between files with the same name but different extensions in other window.
+With FLEX-MATCHING, match any file that contains the base name of current file.
+Other file extensions can be customized with the variable `projectile-other-file-alist'.
+
+\(fn &optional FLEX-MATCHING)" t nil)
+
 (autoload 'projectile-find-file-dwim "projectile" "\
 Jump to a project's files using completion based on context.
 
-With a prefix ARG invalidates the cache first.
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
 
 If point is on a filename, Projectile first tries to search for that
 file in project:
@@ -105,24 +125,24 @@ file in project:
 if the filename is incomplete, but there's only a single file in the current project
 that matches the filename at point.  For example, if there's only a single file named
 \"projectile/projectile.el\" but the current filename is \"projectile/proj\" (incomplete),
-`projectile-find-file' still switches to \"projectile/projectile.el\" immediately
+`projectile-find-file-dwim' still switches to \"projectile/projectile.el\" immediately
  because this is the only filename that matches.
 
 - If it finds a list of files, the list is displayed for selecting.  A list of
 files is displayed when a filename appears more than one in the project or the
 filename at point is a prefix of more than two files in a project.  For example,
-if `projectile-find-file' is executed on a filepath like \"projectile/\", it lists
+if `projectile-find-file-dwim' is executed on a filepath like \"projectile/\", it lists
 the content of that directory.  If it is executed on a partial filename like
  \"projectile/a\", a list of files with character 'a' in that directory is presented.
 
 - If it finds nothing, display a list of all files in project for selecting.
 
-\(fn &optional ARG)" t nil)
+\(fn &optional INVALIDATE-CACHE)" t nil)
 
 (autoload 'projectile-find-file-dwim-other-window "projectile" "\
 Jump to a project's files using completion based on context in other window.
 
-With a prefix ARG invalidates the cache first.
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
 
 If point is on a filename, Projectile first tries to search for that
 file in project:
@@ -131,54 +151,100 @@ file in project:
 if the filename is incomplete, but there's only a single file in the current project
 that matches the filename at point.  For example, if there's only a single file named
 \"projectile/projectile.el\" but the current filename is \"projectile/proj\" (incomplete),
-`projectile-find-file' still switches to \"projectile/projectile.el\"
+`projectile-find-file-dwim-other-window' still switches to \"projectile/projectile.el\"
 immediately because this is the only filename that matches.
 
 - If it finds a list of files, the list is displayed for selecting.  A list of
 files is displayed when a filename appears more than one in the project or the
 filename at point is a prefix of more than two files in a project.  For example,
-if `projectile-find-file' is executed on a filepath like \"projectile/\", it lists
+if `projectile-find-file-dwim-other-window' is executed on a filepath like \"projectile/\", it lists
 the content of that directory.  If it is executed on a partial filename
 like \"projectile/a\", a list of files with character 'a' in that directory
 is presented.
 
 - If it finds nothing, display a list of all files in project for selecting.
 
-\(fn &optional ARG)" t nil)
+\(fn &optional INVALIDATE-CACHE)" t nil)
+
+(autoload 'projectile-find-file-dwim-other-frame "projectile" "\
+Jump to a project's files using completion based on context in other frame.
+
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
+
+If point is on a filename, Projectile first tries to search for that
+file in project:
+
+- If it finds just a file, it switches to that file instantly.  This works even
+if the filename is incomplete, but there's only a single file in the current project
+that matches the filename at point.  For example, if there's only a single file named
+\"projectile/projectile.el\" but the current filename is \"projectile/proj\" (incomplete),
+`projectile-find-file-dwim-other-frame' still switches to \"projectile/projectile.el\"
+immediately because this is the only filename that matches.
+
+- If it finds a list of files, the list is displayed for selecting.  A list of
+files is displayed when a filename appears more than one in the project or the
+filename at point is a prefix of more than two files in a project.  For example,
+if `projectile-find-file-dwim-other-frame' is executed on a filepath like \"projectile/\", it lists
+the content of that directory.  If it is executed on a partial filename
+like \"projectile/a\", a list of files with character 'a' in that directory
+is presented.
+
+- If it finds nothing, display a list of all files in project for selecting.
+
+\(fn &optional INVALIDATE-CACHE)" t nil)
 
 (autoload 'projectile-find-file "projectile" "\
 Jump to a project's file using completion.
-With a prefix ARG invalidates the cache first.
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
 
-\(fn &optional ARG)" t nil)
+\(fn &optional INVALIDATE-CACHE)" t nil)
 
 (autoload 'projectile-find-file-other-window "projectile" "\
 Jump to a project's file using completion and show it in another window.
 
-With a prefix ARG invalidates the cache first.
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
 
-\(fn &optional ARG)" t nil)
+\(fn &optional INVALIDATE-CACHE)" t nil)
+
+(autoload 'projectile-find-file-other-frame "projectile" "\
+Jump to a project's file using completion and show it in another frame.
+
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
+
+\(fn &optional INVALIDATE-CACHE)" t nil)
+
+(autoload 'projectile-toggle-project-read-only "projectile" "\
+Toggle project read only.
+
+\(fn)" t nil)
 
 (autoload 'projectile-find-dir "projectile" "\
 Jump to a project's directory using completion.
 
-With a prefix ARG invalidates the cache first.
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
 
-\(fn &optional ARG)" t nil)
+\(fn &optional INVALIDATE-CACHE)" t nil)
 
 (autoload 'projectile-find-dir-other-window "projectile" "\
 Jump to a project's directory in other window using completion.
 
-With a prefix ARG invalidates the cache first.
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
 
-\(fn &optional ARG)" t nil)
+\(fn &optional INVALIDATE-CACHE)" t nil)
+
+(autoload 'projectile-find-dir-other-frame "projectile" "\
+Jump to a project's directory in other window using completion.
+
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
+
+\(fn &optional INVALIDATE-CACHE)" t nil)
 
 (autoload 'projectile-find-test-file "projectile" "\
 Jump to a project's test file using completion.
 
-With a prefix ARG invalidates the cache first.
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
 
-\(fn &optional ARG)" t nil)
+\(fn &optional INVALIDATE-CACHE)" t nil)
 
 (autoload 'projectile-project-info "projectile" "\
 Display info for current project.
@@ -187,6 +253,11 @@ Display info for current project.
 
 (autoload 'projectile-find-implementation-or-test-other-window "projectile" "\
 Open matching implementation or test file in other window.
+
+\(fn)" t nil)
+
+(autoload 'projectile-find-implementation-or-test-other-frame "projectile" "\
+Open matching implementation or test file in other frame.
 
 \(fn)" t nil)
 
@@ -213,6 +284,13 @@ With an optional prefix argument ARG SEARCH-TERM is interpreted as a
 regular expression.
 
 \(fn SEARCH-TERM &optional ARG)" t nil)
+
+(autoload 'projectile-ripgrep "projectile" "\
+Run a Ripgrep search with `SEARCH-TERM' at current project root.
+
+SEARCH-TERM is a regexp.
+
+\(fn SEARCH-TERM)" t nil)
 
 (autoload 'projectile-regenerate-tags "projectile" "\
 Regenerate the project's [e|g]tags.
@@ -242,15 +320,28 @@ Invoke `async-shell-command' in the project's root.
 (autoload 'projectile-run-shell "projectile" "\
 Invoke `shell' in the project's root.
 
+Switch to the project specific shell buffer if it already exists.
+
 \(fn)" t nil)
 
 (autoload 'projectile-run-eshell "projectile" "\
 Invoke `eshell' in the project's root.
 
+Switch to the project specific eshell buffer if it already exists.
+
+\(fn)" t nil)
+
+(autoload 'projectile-run-ielm "projectile" "\
+Invoke `ielm' in the project's root.
+
+Switch to the project specific ielm buffer if it already exists.
+
 \(fn)" t nil)
 
 (autoload 'projectile-run-term "projectile" "\
 Invoke `term' in the project's root.
+
+Switch to the project specific term buffer if it already exists.
 
 \(fn PROGRAM)" t nil)
 
@@ -271,7 +362,10 @@ to run the replacement.
 \(fn &optional ARG)" t nil)
 
 (autoload 'projectile-kill-buffers "projectile" "\
-Kill all project buffers.
+Kill project buffers.
+
+The buffer are killed according to the value of
+`projectile-kill-buffers-filter'.
 
 \(fn)" t nil)
 
@@ -285,11 +379,26 @@ Open `dired' at the root of the project.
 
 \(fn)" t nil)
 
+(autoload 'projectile-dired-other-window "projectile" "\
+Open `dired'  at the root of the project in another window.
+
+\(fn)" t nil)
+
+(autoload 'projectile-dired-other-frame "projectile" "\
+Open `dired' at the root of the project in another frame.
+
+\(fn)" t nil)
+
 (autoload 'projectile-vc "projectile" "\
 Open `vc-dir' at the root of the project.
 
 For git projects `magit-status-internal' is used if available.
 For hg projects `monky-status' is used if available.
+
+If PROJECT-ROOT is given, it is opened instead of the project
+root directory of the current buffer file.  If interactively
+called with a prefix argument, the user is prompted for a project
+directory to open.
 
 \(fn &optional PROJECT-ROOT)" t nil)
 
@@ -298,6 +407,15 @@ Show a list of recently visited files in a project.
 
 \(fn)" t nil)
 
+(autoload 'projectile-configure-project "projectile" "\
+Run project configure command.
+
+Normally you'll be prompted for a compilation command, unless
+variable `compilation-read-command'.  You can force the prompt
+with a prefix ARG.
+
+\(fn ARG)" t nil)
+
 (autoload 'projectile-compile-project "projectile" "\
 Run project compilation command.
 
@@ -305,7 +423,7 @@ Normally you'll be prompted for a compilation command, unless
 variable `compilation-read-command'.  You can force the prompt
 with a prefix ARG.
 
-\(fn ARG &optional DIR)" t nil)
+\(fn ARG)" t nil)
 
 (autoload 'projectile-test-project "projectile" "\
 Run project test command.
@@ -324,6 +442,17 @@ variable `compilation-read-command'.  You can force the prompt
 with a prefix ARG.
 
 \(fn ARG)" t nil)
+
+(autoload 'projectile-repeat-last-command "projectile" "\
+Run last projectile external command.
+
+External commands are: `projectile-configure-project',
+`projectile-compile-project', `projectile-test-project' and
+`projectile-run-project'.
+
+If the prefix argument SHOW_PROMPT is non nil, the command can be edited.
+
+\(fn SHOW-PROMPT)" t nil)
 
 (autoload 'projectile-switch-project "projectile" "\
 Switch to a project we have visited before.
@@ -376,9 +505,9 @@ Remove the current project from the list of known projects.
 (autoload 'projectile-ibuffer "projectile" "\
 Open an IBuffer window showing all buffers in the current project.
 
-Let user choose another project when PREFIX is supplied.
+Let user choose another project when PROMPT-FOR-PROJECT is supplied.
 
-\(fn PREFIX)" t nil)
+\(fn PROMPT-FOR-PROJECT)" t nil)
 
 (autoload 'projectile-commander "projectile" "\
 Execute a Projectile command with a single letter.
@@ -390,28 +519,23 @@ See `def-projectile-commander-method' for defining new methods.
 
 \(fn)" t nil)
 
+(autoload 'projectile-browse-dirty-projects "projectile" "\
+Browse dirty version controlled projects.
+
+With a prefix argument, or if CACHED is non-nil, try to use the cached
+dirty project list.
+
+\(fn &optional CACHED)" t nil)
+
 (autoload 'projectile-edit-dir-locals "projectile" "\
 Edit or create a .dir-locals.el file of the project.
 
 \(fn)" t nil)
 
-(defvar projectile-mode-line '(:eval (if (file-remote-p default-directory) " Projectile" (format " Projectile[%s]" (projectile-project-name)))) "\
-Mode line lighter for Projectile.
-
-The value of this variable is a mode line template as in
-`mode-line-format'.  See Info Node `(elisp)Mode Line Format' for
-details about mode line templates.
-
-Customize this variable to change how Projectile displays its
-status in the mode line.  The default value displays the project
-name.  Set this variable to nil to disable the mode line
-entirely.")
-
-(custom-autoload 'projectile-mode-line "projectile" t)
-
 (defvar projectile-mode nil "\
 Non-nil if Projectile mode is enabled.
-See the command `projectile-mode' for a description of this minor mode.
+See the `projectile-mode' command
+for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `projectile-mode'.")
@@ -433,7 +557,9 @@ Otherwise behave as if called interactively.
 
 \(fn &optional ARG)" t nil)
 
-(define-obsolete-function-alias 'projectile-global-mode 'projectile-mode)
+(define-obsolete-function-alias 'projectile-global-mode 'projectile-mode "1.0")
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "projectile" '("projectile-" "??" "delete-file-projectile-remove-from-cache" "def-projectile-commander-method" "compilation-find-file-projectile-find-compilation-buffer")))
 
 ;;;***
 
@@ -441,5 +567,6 @@ Otherwise behave as if called interactively.
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; projectile-autoloads.el ends here
