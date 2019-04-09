@@ -147,36 +147,28 @@
 
 ;; Go mode
 ;; Automatically formats your code to the one true coding style, used by every Go developer.
-;; (setq gofmt-command "goimports")
+(setq gofmt-command "goimports")
 ;; (setq gofmt-command "gofmt")
-
-;; (add-hook 'before-save-hook 'gofmt-before-save)
+(add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; only load company-mode with go.
-;; (add-hook 'go-mode-hook (lambda ()
-;;                           (set (make-local-variable 'company-backends) '(company-go))
-;;                           (company-mode)))
-
-;; Let's give auto-complete a try
-;; (defun auto-complete-for-go ()
-;;   (auto-complete-mode 1))
-;; (add-hook 'go-mode-hook 'auto-complete-for-go)
-
-;; (with-eval-after-load 'go-mode
-;;    (require 'go-autocomplete))
+;; make sure gocode is installed!
+(add-hook 'go-mode-hook (lambda ()
+                          (set (make-local-variable 'company-backends) '(company-go))
+                          (company-mode)))
 
 ;; Moar go sugar.
-;; (defun my-go-mode-hook ()
-;;   (whitespace-mode -1) ; don't highlight hard tabs
-;;   (if (not (string-match "go" compile-command))   ; set compile command default
-;;       (set (make-local-variable 'compile-command)
-;;            "cd .. && make test"))
-;;   (setq
-;;    tab-width 2         ; display tabs as two-spaces
-;;    indent-tabs-mode 1  ; use hard tabs to indent
-;;    fill-column 100))   ; set a reasonable fill width
+(defun my-go-mode-hook ()
+  (whitespace-mode -1) ; don't highlight hard tabs
+  (if (not (string-match "go" compile-command))   ; set compile command default
+      (set (make-local-variable 'compile-command)
+           "cd .. && make test"))
+  (setq
+   tab-width 2         ; display tabs as two-spaces
+   indent-tabs-mode 1  ; use hard tabs to indent
+   fill-column 100))   ; set a reasonable fill width
 
-;; (add-hook 'go-mode-hook 'my-go-mode-hook)
+(add-hook 'go-mode-hook 'my-go-mode-hook)
 
 ;; ;; load go-guru "what" mode
 ;; (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)
