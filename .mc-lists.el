@@ -3,15 +3,16 @@
 
 (setq mc/cmds-to-run-for-all
       '(
-	markdown-exdent-or-delete
-	org-beginning-of-line
-	org-self-insert-command
-	yaml-electric-dash-and-dot
-	yas-expand
-	))
+        indent-for-tab-command
+        markdown-exdent-or-delete
+        org-beginning-of-line
+        org-self-insert-command
+        yaml-electric-dash-and-dot
+        yas-expand
+        ))
 
 (setq mc/cmds-to-run-once
       '(
-	delete-line-no-kill
-	yaml-electric-backspace
-	))
+        delete-line-no-kill
+        yaml-electric-backspace
+        ))

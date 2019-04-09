@@ -10,12 +10,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-        (quote
-         ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
+   (quote
+    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
  '(js-indent-level 4)
  '(package-selected-packages
-        (quote
-         (flx-ido flx ivy jedi projectile-rails color-theme-solarized ## yasnippet use-package thrift string-inflection rspec-mode puppetfile-mode puppet-mode projectile neotree multiple-cursors move-text lua-mode let-alist json-mode js2-mode go-guru go-autocomplete git-commit-training-wheels-mode git-blame gist f exec-path-from-shell elixir-mode direx company-go ag 0blayout)))
+   (quote
+    (ido-vertical-mode dumb-jump robe flx-ido flx ivy jedi projectile-rails color-theme-solarized ## yasnippet virtualenvwrapper virtualenv use-package thrift string-inflection rspec-mode puppetfile-mode puppet-mode projectile neotree multiple-cursors move-text lua-mode let-alist json-mode js2-mode jedi-core grizzl go-guru go-autocomplete git-commit-training-wheels-mode git-blame gist f exec-path-from-shell elixir-mode direx company-go coffee-mode ag 0blayout)))
  '(safe-local-variable-values (quote ((encoding . utf-8)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -37,6 +37,10 @@
 
 (add-hook 'after-init-hook #'projectile-global-mode)
 (setq projectile-completion-system 'ivy)
+;; (setq projectile-completion-system 'ido)
+;; (require 'ido-vertical-mode)
+;; (setq ido-vertical-define-keys 'C-n-and-C-p-only)
+
 (setq projectile-remember-window-configs t)
 
 (global-auto-revert-mode t)
@@ -135,6 +139,11 @@
 (global-set-key [f3] 'revert-buffer)
 (global-set-key (kbd "M-s") 'save-buffer)
 (global-set-key (kbd "M-/") 'comment-line)
+
+;; UPDATE me for when I'm not in go-mode
+(global-set-key (kbd "C-c j") 'dumb-jump-go)
+(global-set-key (kbd "C-c C-j") 'dumb-jump-go-other-window)
+(global-set-key (kbd "C-c b") 'dumb-jump-back)
 
 ;; show column and line numbers.
 (setq column-number-mode t)
@@ -237,6 +246,28 @@
 (add-to-list 'load-path "~/.emacs.d/textmate.el")
 (require 'textmate)
 (textmate-mode)
+
+;; (defun copy-current-path-to-clipboard ()
+;;   "Put the current file name on the clipboard"
+;;   (interactive)
+;;   (let ((filename (if (equal major-mode 'dired-mode)
+;;                       default-directory
+;;                     (buffer-file-name))))
+;;     (when filename
+;;       (with-temp-buffer
+;;         (insert filename)
+;;         (clipboard-kill-region (point-min) (point-max)))
+;;       (message filename))))
+;; (global-set-key (kbd "C-c p") 'copy-current-path-to-clipboard)
+
+(defun copy-current-line-position-to-clipboard ()
+  "Copy current line in file to clipboard as '</path/to/file>:<line-number>'."
+  (interactive)
+  (let ((path-with-line-number
+         (concat (buffer-file-name) ":" (number-to-string (line-number-at-pos)))))
+    (kill-new path-with-line-number)
+    (message (concat path-with-line-number " copied to clipboard"))))
+(global-set-key (kbd "C-c p") 'copy-current-line-position-to-clipboard)
 
 (defvar xah-run-current-file-before-hook nil "Hook for `xah-run-current-file'. Before the file is run.")
 (defvar xah-run-current-file-after-hook nil "Hook for `xah-run-current-file'. After the file is run.")
