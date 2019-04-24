@@ -52,6 +52,7 @@
           `((".*" . ,temporary-file-directory)))
     (setq auto-save-file-name-transforms
           `((".*" ,temporary-file-directory t)))
+(setq create-lockfiles nil)
 
 (add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20170216.1928")
 (require 'yasnippet) ;; not yasnippet-bundle
