@@ -15,8 +15,9 @@
  '(js-indent-level 4)
  '(package-selected-packages
    (quote
-    (ido-vertical-mode dumb-jump robe flx-ido flx ivy jedi projectile-rails color-theme-solarized ## yasnippet virtualenvwrapper virtualenv use-package thrift string-inflection rspec-mode puppetfile-mode puppet-mode projectile neotree multiple-cursors move-text lua-mode let-alist json-mode js2-mode jedi-core grizzl go-guru go-autocomplete git-commit-training-wheels-mode git-blame gist f exec-path-from-shell elixir-mode direx company-go coffee-mode ag 0blayout)))
- '(safe-local-variable-values (quote ((encoding . utf-8)))))
+    (typescript-mode browse-at-remote ido-vertical-mode dumb-jump robe flx-ido flx ivy jedi projectile-rails color-theme-solarized ## yasnippet virtualenvwrapper virtualenv use-package thrift string-inflection rspec-mode puppetfile-mode puppet-mode projectile neotree multiple-cursors move-text lua-mode let-alist json-mode js2-mode jedi-core grizzl go-guru go-autocomplete git-commit-training-wheels-mode git-blame gist f exec-path-from-shell elixir-mode direx company-go coffee-mode ag 0blayout)))
+ '(safe-local-variable-values (quote ((encoding . utf-8))))
+ '(typescript-indent-level 2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -145,6 +146,10 @@
 (global-set-key (kbd "C-c j") 'dumb-jump-go)
 (global-set-key (kbd "C-c C-j") 'dumb-jump-go-other-window)
 (global-set-key (kbd "C-c b") 'dumb-jump-back)
+(setq dumb-jump-force-searcher 'ag)
+(setq dumb-jump-prefer-searcher 'ag)
+;; wait up to 10 seconds cause of the large projects
+(setq dumb-jump-max-find-time 10)
 
 ;; show column and line numbers.
 (setq column-number-mode t)
@@ -185,6 +190,8 @@
 
 ;; Ruby --- Rails stuff
 ;; (projectile-rails-global-mode)
+;; Do not insert encoding magic comment
+(setq ruby-insert-encoding-magic-comment nil)
 
 ;; JS Mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -222,7 +229,7 @@
 
 ;; Nice fonts
 ;; (set-default-font "-*-Go-normal-normal-normal-*-*-*-*-*-p-0-iso10646-1")
-(set-default-font "-apple-Monaco-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1")
+(set-frame-font "-apple-Monaco-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1")
 (set-face-attribute 'default nil :height 130)
 
 (load-file "~/.emacs.d/color-theme-tomorrow.el")
