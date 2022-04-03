@@ -9,14 +9,43 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
+ '(ansi-color-names-vector
+   (vector "#1d1f21" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#8abeb7" "#c5c8c6"))
+ '(beacon-color "#cc6666")
+ '(custom-enabled-themes '(sanityinc-tomorrow-night))
  '(custom-safe-themes
-   (quote
-    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
+   '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))
+ '(fci-rule-color "#373b41")
+ '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
+ '(frame-background-mode 'dark)
  '(js-indent-level 4)
  '(package-selected-packages
-   (quote
-    (ido-vertical-mode dumb-jump robe flx-ido flx ivy jedi projectile-rails color-theme-solarized ## yasnippet virtualenvwrapper virtualenv use-package thrift string-inflection rspec-mode puppetfile-mode puppet-mode projectile neotree multiple-cursors move-text lua-mode let-alist json-mode js2-mode jedi-core grizzl go-guru go-autocomplete git-commit-training-wheels-mode git-blame gist f exec-path-from-shell elixir-mode direx company-go coffee-mode ag 0blayout)))
- '(safe-local-variable-values (quote ((encoding . utf-8)))))
+   '(ido-vertical-mode dumb-jump robe flx-ido flx ivy jedi projectile-rails color-theme-solarized ## yasnippet virtualenvwrapper virtualenv use-package thrift string-inflection rspec-mode puppetfile-mode puppet-mode projectile neotree multiple-cursors move-text lua-mode let-alist json-mode js2-mode jedi-core grizzl go-guru go-autocomplete git-commit-training-wheels-mode git-blame gist f exec-path-from-shell elixir-mode direx company-go coffee-mode ag 0blayout))
+ '(safe-local-variable-values '((encoding . utf-8)))
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   '((20 . "#cc6666")
+     (40 . "#de935f")
+     (60 . "#f0c674")
+     (80 . "#b5bd68")
+     (100 . "#8abeb7")
+     (120 . "#81a2be")
+     (140 . "#b294bb")
+     (160 . "#cc6666")
+     (180 . "#de935f")
+     (200 . "#f0c674")
+     (220 . "#b5bd68")
+     (240 . "#8abeb7")
+     (260 . "#81a2be")
+     (280 . "#b294bb")
+     (300 . "#cc6666")
+     (320 . "#de935f")
+     (340 . "#f0c674")
+     (360 . "#b5bd68")))
+ '(vc-annotate-very-old-color nil)
+ '(window-divider-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -222,12 +251,15 @@
 
 ;; Nice fonts
 ;; (set-default-font "-*-Go-normal-normal-normal-*-*-*-*-*-p-0-iso10646-1")
-(set-default-font "-apple-Monaco-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1")
+;; (set-default-font "-apple-Monaco-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1")
 (set-face-attribute 'default nil :height 130)
 
-(load-file "~/.emacs.d/color-theme-tomorrow.el")
+;; (load-file "~/.emacs.d/color-theme-tomorrow.el")
 ;; (color-theme-initialize)
 ;; (color-theme-tomorrow-night)
+
+(require 'color-theme-sanityinc-tomorrow)
+(color-theme-sanityinc-tomorrow-eighties)
 
 (windmove-default-keybindings)
 
