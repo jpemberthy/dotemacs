@@ -25,3 +25,4 @@ recentf
 projectile-bookmarks.eld
 var/pcache/*
 .python-environments
+chatgpt/history/*

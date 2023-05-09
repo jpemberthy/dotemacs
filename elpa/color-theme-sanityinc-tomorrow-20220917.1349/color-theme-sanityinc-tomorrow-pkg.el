@@ -1,4 +1,6 @@
-(define-package "color-theme-sanityinc-tomorrow" "20210907.1208" "A version of Chris Kempson's \"tomorrow\" themes" 'nil :commit "e2857533627f3eda3e9e21de7f2a99b8634c1c15" :authors
+(define-package "color-theme-sanityinc-tomorrow" "20220917.1349" "A version of Chris Kempson's \"tomorrow\" themes" 'nil :commit "96dbaa43ff1326879e76a7943b8ae27265ae84e8" :authors
+  '(("Steve Purcell" . "steve@sanityinc.com"))
+  :maintainers
   '(("Steve Purcell" . "steve@sanityinc.com"))
   :maintainer
   '("Steve Purcell" . "steve@sanityinc.com")

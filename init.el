@@ -1,4 +1,4 @@
-;; Added by Package.el.  This must come before configurations of
+ ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
@@ -14,15 +14,15 @@
  '(ansi-color-names-vector
    (vector "#1d1f21" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#8abeb7" "#c5c8c6"))
  '(beacon-color "#cc6666")
- '(custom-enabled-themes '(sanityinc-tomorrow-night))
+ '(custom-enabled-themes '(sanityinc-tomorrow-eighties))
  '(custom-safe-themes
-   '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))
+   '("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))
  '(fci-rule-color "#373b41")
  '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
  '(frame-background-mode 'dark)
  '(js-indent-level 4)
  '(package-selected-packages
-   '(ido-vertical-mode dumb-jump robe flx-ido flx ivy jedi projectile-rails color-theme-solarized ## yasnippet virtualenvwrapper virtualenv use-package thrift string-inflection rspec-mode puppetfile-mode puppet-mode projectile neotree multiple-cursors move-text lua-mode let-alist json-mode js2-mode jedi-core grizzl go-guru go-autocomplete git-commit-training-wheels-mode git-blame gist f exec-path-from-shell elixir-mode direx company-go coffee-mode ag 0blayout))
+   '(chatgpt-shell web-mode browse-at-remote ido-vertical-mode dumb-jump robe flx-ido flx ivy jedi projectile-rails color-theme-solarized ## yasnippet virtualenvwrapper virtualenv use-package thrift string-inflection rspec-mode puppetfile-mode puppet-mode projectile neotree multiple-cursors move-text lua-mode let-alist json-mode js2-mode jedi-core grizzl go-guru go-autocomplete git-commit-training-wheels-mode git-blame gist f exec-path-from-shell elixir-mode direx company-go coffee-mode ag 0blayout))
  '(safe-local-variable-values '((encoding . utf-8)))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
@@ -64,7 +64,7 @@
 (global-set-key [f8] 'neotree-toggle)
 (global-set-key [f9] 'neotree-find)
 
-(add-hook 'after-init-hook #'projectile-global-mode)
+;; (add-hook 'after-init-hook #'projectile-mode)
 (setq projectile-completion-system 'ivy)
 ;; (setq projectile-completion-system 'ido)
 ;; (require 'ido-vertical-mode)
@@ -106,6 +106,7 @@
 ;; delete selection on edit
 (delete-selection-mode t)
 (setq transient-mark-mode t)
+
 ;; Ctrl-K with no kill
 (defun delete-line-no-kill ()
   (interactive)
@@ -174,6 +175,8 @@
 (global-set-key (kbd "C-c j") 'dumb-jump-go)
 (global-set-key (kbd "C-c C-j") 'dumb-jump-go-other-window)
 (global-set-key (kbd "C-c b") 'dumb-jump-back)
+(setq dumb-jump-prefer-searcher 'ag)
+(setq dumb-jump-max-find-time 10)
 
 ;; show column and line numbers.
 (setq column-number-mode t)
@@ -249,6 +252,9 @@
 (load "server")
 (unless (server-running-p) (server-start))
 
+;; do not set magic encoding comment
+(setq ruby-insert-encoding-magic-comment nil)
+
 ;; Nice fonts
 ;; (set-default-font "-*-Go-normal-normal-normal-*-*-*-*-*-p-0-iso10646-1")
 ;; (set-default-font "-apple-Monaco-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1")
@@ -297,7 +303,7 @@
   "Copy current line in file to clipboard as '</path/to/file>:<line-number>'."
   (interactive)
   (let ((path-with-line-number
-         (concat (buffer-file-name) ":" (number-to-string (line-number-at-pos)))))
+         (concat (file-relative-name buffer-file-name (projectile-project-root)) ":" (number-to-string (line-number-at-pos)))))
     (kill-new path-with-line-number)
     (message (concat path-with-line-number " copied to clipboard"))))
 (global-set-key (kbd "C-c p") 'copy-current-line-position-to-clipboard)
@@ -370,3 +376,5 @@
     (run-hooks 'xah-run-current-file-after-hook)))
 
 (global-set-key (kbd "C-c C-r") 'xah-run-current-file)
+
+(setq ring-bell-function 'ignore)
