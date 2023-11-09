@@ -1,3 +1,6 @@
 [submodule "textmate.el"]
 	path = textmate.el
 	url = git://github.com/jpemberthy/textmate.el.git
+[submodule "copilot.el"]
+	path = copilot.el
+	url = https://github.com/zerolfx/copilot.el

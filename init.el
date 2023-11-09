@@ -22,7 +22,7 @@
  '(frame-background-mode 'dark)
  '(js-indent-level 4)
  '(package-selected-packages
-   '(chatgpt-shell web-mode browse-at-remote ido-vertical-mode dumb-jump robe flx-ido flx ivy jedi projectile-rails color-theme-solarized ## yasnippet virtualenvwrapper virtualenv use-package thrift string-inflection rspec-mode puppetfile-mode puppet-mode projectile neotree multiple-cursors move-text lua-mode let-alist json-mode js2-mode jedi-core grizzl go-guru go-autocomplete git-commit-training-wheels-mode git-blame gist f exec-path-from-shell elixir-mode direx company-go coffee-mode ag 0blayout))
+   '(xref dash s editorconfig chatgpt-shell web-mode browse-at-remote ido-vertical-mode dumb-jump robe flx-ido flx ivy jedi projectile-rails color-theme-solarized ## yasnippet virtualenvwrapper virtualenv use-package thrift string-inflection rspec-mode puppetfile-mode puppet-mode projectile neotree multiple-cursors move-text lua-mode let-alist json-mode js2-mode jedi-core grizzl go-guru go-autocomplete git-commit-training-wheels-mode git-blame gist f exec-path-from-shell elixir-mode direx company-go coffee-mode ag 0blayout))
  '(safe-local-variable-values '((encoding . utf-8)))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
@@ -172,11 +172,18 @@
 (global-set-key (kbd "M-/") 'comment-line)
 
 ;; UPDATE me for when I'm not in go-mode
-(global-set-key (kbd "C-c j") 'dumb-jump-go)
-(global-set-key (kbd "C-c C-j") 'dumb-jump-go-other-window)
-(global-set-key (kbd "C-c b") 'dumb-jump-back)
-(setq dumb-jump-prefer-searcher 'ag)
+;; (global-set-key (kbd "C-c j") 'dumb-jump-go)
+;; (global-set-key (kbd "C-c C-j") 'dumb-jump-go-other-window)
+;; (global-set-key (kbd "C-c b") 'dumb-jump-back)
+;; (setq dumb-jump-prefer-searcher 'ag)
+
+(setq dumb-jump-force-searcher 'rg)
+(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 (setq dumb-jump-max-find-time 10)
+(global-set-key (kbd "C-c j") 'xref-find-definitions)
+(global-set-key (kbd "C-c b") 'xref-pop-marker-stack)
+
+;; (setq xref-show-definitions-function #'xref-show-definitions-completing-read)
 
 ;; show column and line numbers.
 (setq column-number-mode t)
@@ -258,7 +265,7 @@
 ;; Nice fonts
 ;; (set-default-font "-*-Go-normal-normal-normal-*-*-*-*-*-p-0-iso10646-1")
 ;; (set-default-font "-apple-Monaco-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1")
-(set-face-attribute 'default nil :height 130)
+(set-face-attribute 'default nil :height 170)
 
 ;; (load-file "~/.emacs.d/color-theme-tomorrow.el")
 ;; (color-theme-initialize)
@@ -378,3 +385,30 @@
 (global-set-key (kbd "C-c C-r") 'xah-run-current-file)
 
 (setq ring-bell-function 'ignore)
+
+(use-package copilot
+  :load-path (lambda () (expand-file-name "copilot.el" user-emacs-directory))
+  ;; don't show in mode line
+  :diminish)
+
+
+(global-set-key (kbd "C-t") 'copilot-accept-completion)
+
+(defun rk/copilot-tab ()
+  "Tab command that will complet with copilot if a completion is
+available"
+  (interactive)
+  (or (copilot-accept-completion)
+      (indent-for-tab-command)))
+
+(defun rk/copilot-tab ()
+  "Tab command that will complete with Copilot if a completion is available."
+  (interactive)
+  (if (and (minibufferp)
+           (fboundp 'minibuffer-complete))
+      (call-interactively 'minibuffer-complete)
+    (or (copilot-accept-completion)
+        (indent-for-tab-command))))
+
+;; Bind the tab key to the custom function
+(global-set-key (kbd "TAB") #'rk/copilot-tab)
