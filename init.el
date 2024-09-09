@@ -71,6 +71,7 @@
 ;; (setq ido-vertical-define-keys 'C-n-and-C-p-only)
 
 (setq projectile-remember-window-configs t)
+(setq projectile-enable-caching t)
 
 (global-auto-revert-mode t)
 
